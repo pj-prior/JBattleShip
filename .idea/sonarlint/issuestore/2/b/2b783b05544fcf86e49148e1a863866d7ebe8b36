@@ -1,0 +1,10 @@
+
+€
+java:S1319"eThe type of "board" should be an interface such as "List" rather than the implementation "ArrayList".(“üïÑşÿÿÿÿ
+*
+java:S1700'"Rename field "board"(¥¿¬
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìÆ«úÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¨ó÷•
+S	java:S106 "9Replace this use of System.out or System.err by a logger.(Ø´’¾øÿÿÿÿ
+S	java:S106""9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ
+N	java:S106$"9Replace this use of System.out or System.err by a logger.(¨ó÷•
