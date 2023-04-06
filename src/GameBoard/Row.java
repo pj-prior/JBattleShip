@@ -8,30 +8,47 @@ import java.util.Random;
  * @version beta1
  * @since 05/04/2023
  */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Row {
-    private ArrayList<Cell> cells = new ArrayList<>();
+    private final ArrayList<Cell> cells = new ArrayList<>();
 
     public Row(int numberOfColumns){
+        List<Cell.State> states = new ArrayList<>();
         for(int i=0;i<numberOfColumns;i++){
-            cells.add(new Cell());
+            states.add(Cell.State.EMPTY);
         }
+        setCells(states);
     }
 
     public void setShipInACell() {
         Random numberGenerator = new Random();
         int index = numberGenerator.nextInt(cells.size());
-        cells.set(index, new ShipCell());
+        cells.set(index, new ShipCell(Cell.State.SHIP));
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < cells.size(); i++) {
-            sb.append(cells.get(i));
-            if (i != cells.size() - 1) {
-                sb.append(" ");
+    public Cell getCell(int column) {
+        return cells.get(column);
+    }
+
+    public void setCells(List<Cell.State> states) {
+        cells.clear();
+        for (Cell.State state : states) {
+            if (state == Cell.State.SHIP) {
+                cells.add(new ShipCell(state));
+            } else {
+                cells.add(new Cell(state));
             }
         }
-        return sb.toString();
+    }
+
+    public List<Cell.State> getCellStates() {
+        List<Cell.State> states = new ArrayList<>();
+        for (Cell cell : cells) {
+            states.add(cell.getState());
+        }
+        return states;
     }
 }

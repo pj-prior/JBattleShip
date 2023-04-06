@@ -8,13 +8,34 @@ import java.util.Random;
  * @version beta1
  * @since 05/04/2023
  */
+
 public class Board {
-    private ArrayList<Row> rows = new ArrayList<>();
+    private final ArrayList<Row> rows = new ArrayList<>();
+    private final int numberOfRows;
+    private final int numberOfColumns;
 
     public Board(int numberOfRows, int numberOfColumns) {
         for (int i = 0; i < numberOfRows; i++) {
             rows.add(new Row(numberOfColumns));
         }
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
+    }
+
+    public int getNumberOfColumns() {
+        return numberOfColumns;
+    }
+
+    public int getNumberOfRows() {
+        return numberOfRows;
+    }
+
+    public Cell getCell(int row, int col) {
+        if (row < 0 || row >= numberOfRows || col < 0 || col >= numberOfColumns) {
+            throw new IllegalArgumentException("Invalid row or column index");
+        }
+        Row rowObject = rows.get(row);
+        return rowObject.getCell(col);
     }
 
     public void setShipInABoard(int numberOfShips) {
@@ -30,13 +51,15 @@ public class Board {
         return random.nextInt(rows.size());
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Row row : rows) {
-            sb.append(row.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
+    private int getRandomColumnIndex() {
+        Random random = new Random();
+        return random.nextInt(numberOfColumns);
+    }
+
+    public boolean isValidAttack(int row, int col) {
+        Cell cell = getCell(row, col);
+        return !cell.getState().equals(Cell.State.HIT) && !cell.getState().equals(Cell.State.MISS);
     }
 }
+
+

@@ -5,43 +5,37 @@ package GameBoard;
  * @version beta1
  * @since 05/04/2023
  */
-public class Cell implements ICell {
-    private boolean isShip;
-    private boolean isAttacked;
-    private char value;
-
-    public Cell(){
-        this.value='❔';
-        this.isShip=false;
-        this.isAttacked=false;
+public class Cell {
+    public enum State {
+        EMPTY,
+        SHIP,
+        HIT,
+        MISS
     }
 
-    @Override
-    public boolean isShipCell() {
-        return isShip;
+    private State state;
+
+    public Cell(State state) {
+        this.state = state;
     }
 
-    @Override
-    public boolean isAttacked() {
-        return isAttacked;
+    public void setState(State state){
+        this.state=state;
     }
 
-    @Override
-    public void attackCell() {
-        isAttacked = true;
-        if (isShip) {
-            value = '!';
-        } else {
-            value = 'X';
-        }
-    }
-
-    public void setShipCell(){
-        this.isShip=true;
+    public State getState() {
+        return state;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        switch (state) {
+            case HIT:
+                return "\033[32mX\033[0m";
+            case MISS:
+                return "\033[31mX\033[0m";
+            default:
+                return " ";
+        }
     }
 }

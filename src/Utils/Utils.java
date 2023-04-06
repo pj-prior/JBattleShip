@@ -1,8 +1,6 @@
 package Utils;
 
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Creates the game board
@@ -49,10 +47,12 @@ public class Utils {
         return inputValue.nextLine();
     }
 
-    public static void cleanScreen() {
-        for (int x = 0; x < 50; x++) {
-            System.out.println(" ");
+    public static List<Character> divideLineInCharacters(String message){
+        List<Character> characters = new ArrayList<>();
+        for(int i=0;i<message.length();i++){
+            characters.add(message.charAt(i));
         }
+        return characters;
     }
 
     private static Scanner inputValue = new Scanner(System.in).useLocale(Locale.US);

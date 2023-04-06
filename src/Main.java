@@ -1,6 +1,8 @@
-import Game.Board;
-
-import java.util.ArrayList;
+import GameBoard.Board;
+import GameBoard.BoardPrinter;
+import UserInterface.Attack;
+import UserInterface.UserInput;
+import Utils.Utils;
 
 /**
  * @author pj.prior
@@ -10,7 +12,14 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        char c = '❌';
-        System.out.println(c);
+        Board board = new Board(6,6);
+        while (true){
+            BoardPrinter.printBoard(board);
+            String coordinate = UserInput.readCoordinate(board);
+            Attack attack = new Attack(board);
+
+            attack.attackCell(coordinate);
+            BoardPrinter.cleanScreen();
+        }
     }
 }
